@@ -1,0 +1,17 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/ProjectEvaluation
+/.vs/Lab3/v17
+/.vs/Lab3/FileContentIndex
+/.vs/Lab3/DesignTimeBuild
+/.vs/Lab3/CopilotIndices/17.14.1431.25910
+/Data/bin/Debug/net9.0
+/Data/obj
+/Repositories/bin/Debug/net9.0
+/Repositories/obj
+/Services/bin/Debug/net9.0
+/Services/obj
+/UI/bin/Debug/net9.0-windows
+/UI/obj
