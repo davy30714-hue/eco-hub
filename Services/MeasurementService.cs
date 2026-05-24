@@ -34,7 +34,7 @@ namespace Services
             }
 
             start = start.Date;
-            end = end.Date.AddDays(1).AddTicks(-1); // include the full end day
+            end = end.Date.AddDays(1).AddTicks(-1); 
 
             var query = _repo.Find(m => m.Timestamp >= start && m.Timestamp <= end);
 
@@ -48,7 +48,7 @@ namespace Services
         public int AddMeasurement(Measurements measurement)
         {
             if (measurement.Value < 0 && measurement.ParameterType == "pH")
-                throw new Exception("pH не може бути від'ємним!");
+                throw new Exception("pH cannot be negative");
 
             _repo.Add(measurement);
             int rowsAffected = _repo.Save();

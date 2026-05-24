@@ -14,7 +14,7 @@ namespace Repositories
         void Add(T entity);
         void Update(T entity);
         void Delete(T entity);
-        int Save(); // Returns number of affected rows
+        int Save(); 
         IEnumerable<T> Find(Expression<Func<T, bool>> predicate);
     }
 }

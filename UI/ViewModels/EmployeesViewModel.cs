@@ -46,20 +46,6 @@ namespace UI.ViewModels
             EmployeesList.DataSource = data.ToList();
         }
 
-        public void AddEmployee(string name, string role)
-        {
-            var emp = new Employees
-            {
-                FullName = name,
-                Role = role,
-                Status = "Активний",
-                ContactInfo = "Н/Д"
-            };
-
-            _service.AddEmployee(emp);
-            LoadData();
-        }
-
         public void AddFromGrid(Employees selectedRow)
         {
             EmployeesList.EndEdit();
@@ -99,12 +85,6 @@ namespace UI.ViewModels
             if (emp == null) return;
 
             _service.DeleteEmployee(emp.EmployeeId);
-            LoadData();
-        }
-
-        public void UpdateEmployee(Employees emp)
-        {
-            _service.UpdateEmployee(emp);
             LoadData();
         }
 

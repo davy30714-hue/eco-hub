@@ -25,12 +25,6 @@ namespace UI.ViewModels
             ExpeditionList.DataSource = new BindingList<Expeditions>(data.ToList());
         }
 
-        public int GetNextAvailableId()
-        {
-            var allExpeditions = _service.GetAll().ToList();
-            return allExpeditions.Any() ? allExpeditions.Max(e => e.ExpeditionId) + 1 : 1;
-        }
-
         public void Search(string notes, DateTime startDate, DateTime endDate, bool isActive)
         {
             var data = _service.GetAll();
@@ -79,12 +73,6 @@ namespace UI.ViewModels
             LoadData();
         }
 
-        public void UpdateExpedition(Expeditions exp)
-        {
-            _service.UpdateExpedition(exp);
-            LoadData();
-        }
-
         public void SaveUpdatesFromGrid()
         {
             ExpeditionList.EndEdit();
@@ -122,11 +110,10 @@ namespace UI.ViewModels
 
         public string GetReportInfo(Expeditions exp)
         {
-            return $"Expedition Report #{exp.ExpeditionId}\n" +
+            return $"Expedition Report №{exp.ExpeditionId}\n" +
                    $"Status: {exp.Status}\n" +
                    $"Period: {exp.StartDate:d} - {exp.EndDate:d}\n" +
                    $"Notes: {exp.Notes}";
         }
-
     }
 }

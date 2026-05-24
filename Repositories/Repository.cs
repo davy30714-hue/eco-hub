@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Data.Context;
 using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Data.SqlClient;
 using System.Text;
 using System.Threading.Tasks;
+using Data.Context;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Repositories
 {
@@ -29,7 +31,7 @@ namespace Repositories
             }
             catch (SqlException ex)
             {
-                throw new Exception("Помилка з'єднання з базою даних під час читання даних.", ex);
+                throw new Exception("Database connection error", ex);
             }
         }
 
@@ -41,7 +43,7 @@ namespace Repositories
             }
             catch (SqlException ex)
             {
-                throw new Exception("Не вдалося отримати запис з бази даних. Перевірте з'єднання.", ex);
+                throw new Exception("Failed to retrieve record from database.", ex);
             }
         }
 
@@ -68,11 +70,11 @@ namespace Repositories
             }
             catch (DbUpdateException ex) when (ex.InnerException is SqlException)
             {
-                throw new Exception("Помилка під час збереження даних. Перевірте з'єднання з базою даних.", ex);
+                throw new Exception("Error while saving data.", ex);
             }
             catch (SqlException ex)
             {
-                throw new Exception("Неможливо встановити підключення до бази даних. Переконайтеся, що SQL Server доступний.", ex);
+                throw new Exception("Unable to establish a connection to the database. Make sure that SQL Server is available.", ex);
             }
         }
         public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
@@ -83,7 +85,7 @@ namespace Repositories
             }
             catch (SqlException ex)
             {
-                throw new Exception("Сталася помилка під час виконання запиту до бази даних.", ex);
+                throw new Exception("An error occurred while executing a database query.", ex);
             }
         }
     }

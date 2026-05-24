@@ -50,27 +50,6 @@ namespace UI.ViewModels
             EquipmentList.DataSource = new BindingList<Equipment>(data.ToList());
         }
 
-        public void AddEquipment(string name, string serial, string type)
-        {
-            var eq = new Equipment
-            {
-                Name = name,
-                SerialNumber = serial,
-                EquipmentType = type,
-                Status = "Робочий",
-                LastCalibrationDate = System.DateTime.Now.Date
-            };
-
-            _service.AddEquipment(eq);
-            LoadData();
-        }
-
-        public void UpdateEquipment(Equipment eq)
-        {
-            _service.UpdateEquipment(eq);
-            LoadData();
-        }
-
         public void SaveUpdatesFromGrid()
         {
             EquipmentList.EndEdit();

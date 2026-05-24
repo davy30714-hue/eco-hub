@@ -56,11 +56,11 @@ namespace Services
         {
             if (expedition.StartDate < DateTime.Now.Date)
             {
-                throw new Exception("Увага: Дата в минулому");
+                throw new Exception("Warning: Date is in the past.");
             }
             if (expedition.EndDate < expedition.StartDate)
             {
-                throw new Exception("Кінцева дата не може бути раніше початкової дати");
+                throw new Exception("End date cannot be earlier than Start date.");
             }
 
             _expeditionRepo.Add(expedition);

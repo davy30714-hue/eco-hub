@@ -23,12 +23,6 @@ namespace UI.ViewModels
             LocationList.DataSource = new BindingList<Locations>(_service.GetAll().ToList());
         }
 
-        public int GetNextAvailableId()
-        {
-            var allLocations = _service.GetAll().ToList();
-            return allLocations.Any() ? allLocations.Max(l => l.LocationId) + 1 : 1;
-        }
-
         public void Search(string idText, string ecosystem)
         {
             if (int.TryParse(idText, out int id))
@@ -49,20 +43,6 @@ namespace UI.ViewModels
                 data = _service.GetByEcosystem(ecosystem);
 
             LocationList.DataSource = new BindingList<Locations>(data.ToList());
-        }
-
-        public void AddLocation(string name, string ecosystem, double lat, double lon)
-        {
-            var loc = new Locations
-            {
-                Name = name,
-                EcosystemType = ecosystem,
-                GpsLatitude = lat,
-                GpsLongitude = lon,
-                Description = "New Location"
-            };
-            _service.AddLocation(loc);
-            LoadData();
         }
 
         public void AddFromGrid(Locations selectedRow)
@@ -104,12 +84,6 @@ namespace UI.ViewModels
                 _service.UpdateLocation(loc);
             }
 
-            LoadData();
-        }
-
-        public void UpdateLocation(Locations loc)
-        {
-            _service.UpdateLocation(loc);
             LoadData();
         }
 

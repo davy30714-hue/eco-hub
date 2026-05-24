@@ -24,12 +24,6 @@ namespace UI.ViewModels
             MeasurementList.DataSource = new BindingList<Measurements>(_service.GetAll().ToList());
         }
 
-        public int GetNextAvailableId()
-        {
-            var allMeasurements = _service.GetAll().ToList();
-            return allMeasurements.Any() ? allMeasurements.Max(m => m.MeasurementId) + 1 : 1;
-        }
-
         public void Search(string locationIdText, DateTime start, DateTime end)
         {
             if (!string.IsNullOrWhiteSpace(locationIdText) && int.TryParse(locationIdText, out int measId))
@@ -62,23 +56,6 @@ namespace UI.ViewModels
                 locId = locIdValue;
 
             return _service.GetStats(start, end, locId);
-        }
-
-        public void AddMeasurement(string type, double val, string unit, int locationId, int expeditionId, int equipId, int empId)
-        {
-            var m = new Measurements
-            {
-                ParameterType = type,
-                Value = val,
-                Unit = unit,
-                Timestamp = DateTime.Now,
-                LocationId = locationId,
-                ExpeditionId = expeditionId,
-                EquipmentId = equipId,
-                EmployeeId = empId
-            };
-            _service.AddMeasurement(m);
-            LoadData();
         }
 
         public void AddFromGrid(Measurements selectedRow)

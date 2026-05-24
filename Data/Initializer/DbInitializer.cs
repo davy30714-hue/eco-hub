@@ -14,8 +14,6 @@ namespace Data.Initializer
                 return;
             }
 
-            Console.WriteLine("Початок заповнення тестовими даними...");
-
             var emp1 = new Employees
             {
                 FullName = "Дослідниця Ольга Коваль",
@@ -223,7 +221,6 @@ namespace Data.Initializer
             );
 
             context.SaveChanges();
-            Console.WriteLine("Дані успішно завантажено!");
         }
     }
 }

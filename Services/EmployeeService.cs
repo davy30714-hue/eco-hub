@@ -55,7 +55,7 @@ namespace Services
         {
             if (string.IsNullOrEmpty(emp.FullName))
             {
-                throw new Exception("Ім'я не може бути пустим");
+                throw new Exception("Name cannot be empty.");
             }
 
             _employeeRepo.Add(emp);

@@ -21,11 +21,6 @@ namespace Services
 
         public Equipment GetById(int id) => _repo.GetById(id);
 
-        public IEnumerable<Equipment> GetBrokenEquipment()
-        {
-            return _repo.Find(e => e.Status == "Needs Repair" || e.Status == "Broken");
-        }
-
         public IEnumerable<Equipment> GetAvailableEquipment()
         {
             return _repo.Find(e => (e.Status == "Робочий" || e.Status == "Available") && e.EmployeeId == null);
@@ -58,11 +53,11 @@ namespace Services
             var eq = _repo.GetById(eqId);
             var emp = _empRepo.GetById(empId);
 
-            if (eq == null) throw new Exception("Обладнання не знайдено");
-            if (emp == null) throw new Exception("Працівника не знайдено");
+            if (eq == null) throw new Exception("Equipment not found.");
+            if (emp == null) throw new Exception("Employee not found.");
 
             eq.EmployeeId = empId;
-            eq.Status = "In Use"; // Keep as is when assigned
+            eq.Status = "In Use"; 
 
             _repo.Update(eq);
             _repo.Save();
@@ -74,7 +69,7 @@ namespace Services
             if (eq == null) return;
 
             eq.EmployeeId = null;
-            eq.Status = "Робочий"; // Use Ukrainian status
+            eq.Status = "Available"; 
 
             _repo.Update(eq);
             _repo.Save();
